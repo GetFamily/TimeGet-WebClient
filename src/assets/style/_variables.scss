@@ -1,7 +1,8 @@
 $padding-main: 20px;
 
-
-
+$color_primary: #60cdff;
+$color_primary_dark_10: darken(#60cdff, 10%);
+$color_primary_dark_20: darken(#60cdff, 20%);
 $color_font_white: white;
 $color_bg_white: white;
 $color_gray: #2e333f;
@@ -9,6 +10,7 @@ $color_gray_10: lighten($color_gray, 10);
 $color_gray_20: lighten($color_gray, 20);
 $color_gray_30: lighten($color_gray, 30);
 $color_gray_40: lighten($color_gray, 40);
+$color_gray_50: lighten($color_gray, 50);
 $color_gray_60: lighten($color_gray, 60);
 $color_gray_70: lighten($color_gray, 70);
 $color_gray_80: lighten($color_gray, 80);

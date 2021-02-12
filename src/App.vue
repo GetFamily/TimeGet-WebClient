@@ -56,7 +56,7 @@ export default {
         color: $color_gray_20;
         background-color: $color_bg_white;
         box-shadow: 0 0 5px -2px $color_gray;
-        z-index: 1;
+        z-index: 2;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
         position: relative;
@@ -85,6 +85,7 @@ export default {
   }
 
   .current-route {
+    z-index: 1;
     height: 100%;
     flex-grow: 1;
     background-color: $color_bg_white;

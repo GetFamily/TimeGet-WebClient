@@ -2,6 +2,7 @@
   <!-- {{ $props.now }} -->
   <div class="container">
     <AnalogClock
+      :now="now"
       outer-background="none"
       outer-border="none"
       outer-diameter="300px"
@@ -51,6 +52,6 @@ export default {
   width: 320px;
   height: 320px;
   padding: 10px;
-  transform: scale(.7);
+  transform: scale(0.7);
 }
 </style>

@@ -27,7 +27,6 @@ export default {
 @import "@/assets/style/_variables";
 .smart-today {
   background-color: $color_bg_white;
-  z-index: -1;
   margin-left: 10px;
   height: calc(100% - 20px);
   box-shadow: 0 0 5px -2px $color_gray;

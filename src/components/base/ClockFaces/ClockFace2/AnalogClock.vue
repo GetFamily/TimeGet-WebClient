@@ -1,5 +1,5 @@
 <template>
-  <div class="clock">
+  <div class="clock" ref="el">
     <div v-if="hourMarkers">
       <div
         v-once
@@ -29,11 +29,9 @@
 <script>
 // TODO: Consider adding drop-shadows
 // TODO: Consider adding some numbers (e.g. 12, 3, 6, 9)
-
+import { computed, onMounted, ref, toRef, watch } from "vue";
 import anime from "animejs";
 import moment from "moment";
-
-let _interval = null;
 
 const DEGREES_TO_MOVE_SECOND_HAND = 360 / 60;
 const DEGREES_TO_MOVE_MINUTE_HAND = 360 / 60;
@@ -44,6 +42,10 @@ const SECONDS_IN_MINUTE = 60;
 export default {
   name: "AnalogClock",
   props: {
+    now: {
+      type: Date,
+      default: new Date(),
+    },
     hourMarkers: {
       type: Boolean,
       default: true,
@@ -137,121 +139,128 @@ export default {
       default: "1px solid #000",
     },
   },
-  data() {
-    return {
-      time: null,
-    };
-  },
-  computed: {
-    hrMarkers() {
+  setup(props) {
+    const el = ref(null);
+    const now = toRef(props, "now");
+    const time = ref(moment(props.now));
+    const hrMarkers = computed(() => {
       return [...Array(12).keys()].map((i) => i + 1);
-    },
-    minMarkers() {
+    });
+    const minMarkers = computed(() => {
       return [...Array(60).keys()].map((i) => i + 1);
-    },
-    hours() {
-      return this.time.hours();
-    },
-    minutes() {
-      return this.time.minutes();
-    },
-    seconds() {
-      return this.time.seconds();
-    },
-  },
-  methods: {
-    activate() {
-      this.setHourHand();
-      this.setMinuteHand();
-      this.setSecondHand();
-      _interval = setInterval(() => {
-        this.time = moment();
-        this.animateHourHand();
-        this.animateMinuteHand();
-        this.animateSecondHand();
-      }, 1000);
-    },
-    animateHourHand() {
-      this.setHourHand();
-    },
-    animateMinuteHand() {
-      this.setMinuteHand();
-    },
-    animateSecondHand() {
+    });
+    const hours = computed(() => {
+      return time.value.hours();
+    });
+    const minutes = computed(() => {
+      return time.value.minutes();
+    });
+    const seconds = computed(() => {
+      return time.value.seconds();
+    });
+    const activate = () => {
+      setHourHand();
+      setMinuteHand();
+      setSecondHand();
+      watch(
+        now,
+        () => {
+          time.value = moment(now.value);
+          animateHourHand();
+          animateMinuteHand();
+          animateSecondHand();
+        },
+        { immediate: false }
+      );
+    };
+    const animateHourHand = () => {
+      setHourHand();
+    };
+    const animateMinuteHand = () => {
+      setMinuteHand();
+    };
+    const animateSecondHand = () => {
       // immediately set rotation less than actual value
       anime.set(".second-hand", {
-        rotate: (this.seconds - 1) * DEGREES_TO_MOVE_SECOND_HAND,
+        rotate: (seconds.value - 1) * DEGREES_TO_MOVE_SECOND_HAND,
       });
       // then animate to actual value
       anime({
         targets: ".second-hand",
-        rotate: this.seconds * DEGREES_TO_MOVE_SECOND_HAND,
+        rotate: seconds.value * DEGREES_TO_MOVE_SECOND_HAND,
       });
-    },
-    hourMarkerStyle(hour) {
+    };
+    const hourMarkerStyle = (hour) => {
       return { transform: `rotate(${hour * DEGREES_TO_MOVE_HOUR_HAND}deg)` };
-    },
-    minuteMarkerStyle(minute) {
+    };
+    const minuteMarkerStyle = (minute) => {
       return {
         transform: `rotate(${minute * DEGREES_TO_MOVE_MINUTE_HAND}deg)`,
       };
-    },
-    setHourHand() {
-      let totalSeconds = this.minutes * SECONDS_IN_MINUTE + this.seconds;
+    };
+    const setHourHand = () => {
+      let totalSeconds = minutes.value * SECONDS_IN_MINUTE + seconds.value;
       let offset = totalSeconds * (DEGREES_TO_MOVE_HOUR_HAND / SECONDS_IN_HOUR);
       anime.set(".hour-hand", {
-        rotate: this.hours * DEGREES_TO_MOVE_HOUR_HAND + offset,
+        rotate: hours.value * DEGREES_TO_MOVE_HOUR_HAND + offset,
       });
-    },
-    setMinuteHand() {
+    };
+    const setMinuteHand = () => {
       let offset =
-        this.seconds * (DEGREES_TO_MOVE_MINUTE_HAND / SECONDS_IN_MINUTE);
+        seconds.value * (DEGREES_TO_MOVE_MINUTE_HAND / SECONDS_IN_MINUTE);
       anime.set(".minute-hand", {
-        rotate: this.minutes * DEGREES_TO_MOVE_MINUTE_HAND + offset,
+        rotate: minutes.value * DEGREES_TO_MOVE_MINUTE_HAND + offset,
       });
-    },
-    setSecondHand() {
+    };
+    const setSecondHand = () => {
       anime.set(".second-hand", {
-        rotate: this.seconds * DEGREES_TO_MOVE_SECOND_HAND,
+        rotate: seconds.value * DEGREES_TO_MOVE_SECOND_HAND,
       });
-    },
-    setProperty(property, value) {
-      this.$el.style.setProperty(property, value);
-    },
-    setProperties() {
-      this.setProperty("--clock-outer-background", this.outerBackground);
-      this.setProperty("--clock-outer-border", this.outerBorder);
-      this.setProperty("--clock-outer-diameter", this.outerDiameter);
-      this.setProperty("--clock-inner-background", this.innerBackground);
-      this.setProperty("--clock-inner-border", this.innerBorder);
-      this.setProperty("--clock-inner-diameter", this.innerDiameter);
-      this.setProperty("--hour-marker-color", this.hourMarkerColor);
-      this.setProperty("--hour-marker-width", this.hourMarkerWidth);
-      this.setProperty("--hour-marker-height", this.hourMarkerHeight);
-      this.setProperty("--hour-hand-color", this.hourHandColor);
-      this.setProperty("--hour-hand-width", this.hourHandWidth);
-      this.setProperty("--hour-hand-height", this.hourHandHeight);
-      this.setProperty("--hour-hand-tail", this.hourHandTail);
-      this.setProperty("--minute-hand-color", this.minuteHandColor);
-      this.setProperty("--minute-hand-width", this.minuteHandWidth);
-      this.setProperty("--minute-hand-height", this.minuteHandHeight);
-      this.setProperty("--minute-hand-tail", this.minuteHandTail);
-      this.setProperty("--second-hand-color", this.secondHandColor);
-      this.setProperty("--second-hand-width", this.secondHandWidth);
-      this.setProperty("--second-hand-height", this.secondHandHeight);
-      this.setProperty("--second-hand-tail", this.secondHandTail);
-    },
-  },
-  created() {
-    this.time = moment();
-  },
-  mounted() {
-    this.setProperties();
-    this.activate();
-  },
-  beforeUnmount() {
-    clearInterval(_interval);
-    _interval = null;
+    };
+    const setProperty = (property, value) => {
+      el.value.style.setProperty(property, value);
+    };
+    const setProperties = () => {
+      setProperty("--clock-outer-background", props.outerBackground);
+      setProperty("--clock-outer-border", props.outerBorder);
+      setProperty("--clock-outer-diameter", props.outerDiameter);
+      setProperty("--clock-inner-background", props.innerBackground);
+      setProperty("--clock-inner-border", props.innerBorder);
+      setProperty("--clock-inner-diameter", props.innerDiameter);
+      setProperty("--hour-marker-color", props.hourMarkerColor);
+      setProperty("--hour-marker-width", props.hourMarkerWidth);
+      setProperty("--hour-marker-height", props.hourMarkerHeight);
+      setProperty("--hour-hand-color", props.hourHandColor);
+      setProperty("--hour-hand-width", props.hourHandWidth);
+      setProperty("--hour-hand-height", props.hourHandHeight);
+      setProperty("--hour-hand-tail", props.hourHandTail);
+      setProperty("--minute-hand-color", props.minuteHandColor);
+      setProperty("--minute-hand-width", props.minuteHandWidth);
+      setProperty("--minute-hand-height", props.minuteHandHeight);
+      setProperty("--minute-hand-tail", props.minuteHandTail);
+      setProperty("--second-hand-color", props.secondHandColor);
+      setProperty("--second-hand-width", props.secondHandWidth);
+      setProperty("--second-hand-height", props.secondHandHeight);
+      setProperty("--second-hand-tail", props.secondHandTail);
+    };
+
+    onMounted(() => {
+      setProperties();
+      activate();
+    });
+
+    return {
+      el,
+      time: null,
+      hrMarkers,
+      minMarkers,
+      hours,
+      minutes,
+      seconds,
+      ...props,
+      hourMarkerStyle,
+      minuteMarkerStyle,
+    };
   },
 };
 </script>

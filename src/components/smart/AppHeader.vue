@@ -20,7 +20,7 @@ export default {
   padding: 10px $padding-main;
   box-shadow: 0 0 13px -4px $color_gray;
   background-color: $color_bg_white;
-  z-index: 2;
+  z-index: 9;
   font-size: 20px;
 }
 </style>
