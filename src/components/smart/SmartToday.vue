@@ -1,11 +1,26 @@
 <template>
   <div class="smart-today">
-    <h1>امروز</h1>
+    <SmartClock :now="now"></SmartClock>
   </div>
 </template>
 
 <script>
-export default {};
+import { computed } from "vue";
+import { useStore } from "vuex";
+import SmartClock from "@/components/smart/SmartClock.vue";
+export default {
+  components: {
+    SmartClock,
+  },
+  setup() {
+    const store = useStore();
+    store.commit("runNowInterval");
+    const now = computed(() => store.state.now);
+    return {
+      now,
+    };
+  },
+};
 </script>
 
 <style lang="scss">
@@ -18,9 +33,10 @@ export default {};
   box-shadow: 0 0 5px -2px $color_gray;
   border-radius: 3px;
   margin-right: -3px;
+  padding-right: 3px;
 
-  h1{
-      padding: 50px;
+  h1 {
+    padding: 50px;
   }
 }
 </style>
