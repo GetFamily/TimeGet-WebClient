@@ -9,6 +9,7 @@
         <router-link to="/articles">مقالات</router-link>
         <router-link to="/resource-introduction">معرفی منبع</router-link>
         <router-link to="/ladies">بانوان</router-link>
+        <router-link to="/getting-pregnant">تشکیل نطفه</router-link>
         <router-link to="/pregnancy">بارداری</router-link>
       </div>
       <router-view class="current-route" />
