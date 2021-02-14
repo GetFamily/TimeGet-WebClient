@@ -4,6 +4,10 @@ import Occations from "../views/Occations.vue";
 const routes = [
   {
     path: "/",
+    redirect: "/occations"
+  },
+  {
+    path: "/occations",
     name: "Occations",
     component: Occations
   },

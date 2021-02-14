@@ -1,7 +1,9 @@
 @import './_reset';
-@import '../fonts/_fontiran.scss';
+@import './_variables';
+@import '../fonts/_fontiran';
 
 body{
     font-family: IRANSans, Avenir, Helvetica, Arial, sans-serif;
-    background-color: #60cdff;
+    background-color: $color_primary;
+    color: $color_black;
 }

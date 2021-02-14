@@ -3,7 +3,7 @@
     <AppHeader></AppHeader>
     <main class="app-content">
       <div id="nav">
-        <router-link to="/">مناسبت‌ها</router-link>
+        <router-link to="/occations">مناسبت‌ها</router-link>
         <router-link to="/religious-moments">اوقات شرعی</router-link>
         <router-link to="/hadithes">احادیث و روایات</router-link>
         <router-link to="/articles">مقالات</router-link>
@@ -51,6 +51,7 @@ export default {
       text-decoration: none;
       padding: 20px;
       text-align: center;
+      border-right: solid thick $color_primary;
 
       &.router-link-exact-active {
         color: $color_gray_20;
@@ -59,6 +60,7 @@ export default {
         z-index: 2;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
+        border-right: solid thick $color_secondary;
         position: relative;
         &::before,
         &::after {

@@ -58,10 +58,10 @@ export default {
     position: absolute;
     left: 5px;
     .item {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      border: solid thin $color_primary_dark_10;
+      border: solid 2px $color_secondary;
       cursor: pointer;
 
       &:not(:last-child) {
@@ -69,7 +69,7 @@ export default {
       }
 
       &.active {
-        background-color: $color_primary_dark_10;
+        background-color: $color_secondary;
       }
     }
   }
