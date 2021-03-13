@@ -1,21 +1,12 @@
 import { createStore } from "vuex";
+import currentModule from './current';
+import pickerModule from './picker';
+import occasionsModule from './occasions';
 
 export default createStore({
-  state: {
-    now: new Date(),
-  },
-  mutations: {
-    runNowInterval(state){
-      setInterval(() => {
-        state.now = new Date();
-      }, 1000);
-    }
-  },
-  actions: {},
-  getters: {
-    now(state){
-      return state.now;
-    }
-  },
-  modules: {}
+  modules: {
+    currentModule,
+    pickerModule,
+    occasionsModule,
+  }
 });

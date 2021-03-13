@@ -34,7 +34,7 @@ export default {
   },
   props: ["now"],
   setup() {
-    const selectedFace = ref(0);
+    const selectedFace = ref(1);
     const facesCount = 2; // Remember to add by one if another face added
     return {
       selectedFace,

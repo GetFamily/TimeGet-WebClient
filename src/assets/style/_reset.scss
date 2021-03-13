@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    outline: none;
 }
 body, figure{
     margin: 0;
@@ -8,4 +9,7 @@ body, figure{
 img{
     max-width: 100%;
     max-height: 100%;
+}
+button{
+    cursor: pointer;
 }

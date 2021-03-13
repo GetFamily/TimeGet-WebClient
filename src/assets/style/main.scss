@@ -1,9 +1,15 @@
-@import './_reset';
-@import './_variables';
-@import '../fonts/_fontiran';
+@import "toastr";
+@import "./_reset";
+@import "./_variables";
+@import "../fonts/_fontiran";
+@import "./scrollbar";
+@import "./scroll-top";
 
-body{
+body,
+button {
     font-family: IRANSans, Avenir, Helvetica, Arial, sans-serif;
+}
+body {
     background-color: $color_primary;
     color: $color_black;
 }

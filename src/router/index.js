@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Occations from "../views/Occations.vue";
+import Occasions from "../views/Occasions.vue";
 
 const routes = [
   {
     path: "/",
-    redirect: "/occations"
+    redirect: "/occasions"
   },
   {
-    path: "/occations",
-    name: "Occations",
-    component: Occations
+    path: "/occasions",
+    name: "Occasions",
+    component: Occasions
   },
   {
     path: "/religious-moments",

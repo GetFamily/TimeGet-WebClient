@@ -3,14 +3,14 @@
     <section class="right-items">
       <router-link to="/">
         <figure class="logo">
-          <img src="/AppLogo.png" alt="" />
+          <img src="/img/android-chrome-512x512.png" alt="" />
         </figure>
       </router-link>
       <router-link to="/">
         <strong>تایم‌گت</strong> <small>لحظات آسمانی</small>
       </router-link>
     </section>
-    <section class="left-items"><small>نسخهٔ آزمایشی</small></section>
+    <section class="left-items"><small>نسخهٔ در حال توسعه</small></section>
   </header>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   box-shadow: 0 0 13px -4px $color_gray;
   background-color: $color_bg_white;
   z-index: 9;
-  font-size: 20px;
+  font-size: 14px;
 
   a {
     text-decoration: none;
@@ -50,6 +50,10 @@ export default {
     .logo {
       height: 40px;
     }
+  }
+
+  @media (max-width: 661px) {
+    padding-right: 60px;
   }
 }
 </style>

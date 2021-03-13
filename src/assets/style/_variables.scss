@@ -1,11 +1,14 @@
-$padding-main: 20px;
-
-$color_primary_light_20: lighten(#60cdff, 20%);
-$color_primary_light_10: lighten(#60cdff, 10%);
 $color_primary: #60cdff;
-$color_primary_dark_10: darken(#60cdff, 10%);
-$color_primary_dark_20: darken(#60cdff, 20%);
+$color_primary_light_20: lighten($color_primary, 20%);
+$color_primary_light_10: lighten($color_primary, 10%);
+$color_primary_dark_10: darken($color_primary, 10%);
+$color_primary_dark_20: darken($color_primary, 20%);
 $color_secondary: #ffcd60;
+$color_secondary_light_20: lighten($color_secondary, 20%);
+$color_secondary_light_10: lighten($color_secondary, 10%);
+$color_secondary_dark_10: darken($color_secondary, 10%);
+$color_secondary_dark_20: darken($color_secondary, 20%);
+$color_red: #ff6060;
 $color_font_white: white;
 $color_bg_white: white;
 $color_gray: #2e333f;
@@ -16,5 +19,12 @@ $color_gray_40: lighten($color_gray, 40);
 $color_gray_50: lighten($color_gray, 50);
 $color_gray_60: lighten($color_gray, 60);
 $color_gray_70: lighten($color_gray, 70);
+$color_gray_75: lighten($color_gray, 75);
 $color_gray_80: lighten($color_gray, 80);
 $color_black: lighten(black, 5);
+
+$radius_normal: 7px;
+
+$shaddow_normal: 0 0 6px -2px $color_gray;
+
+$padding-main: 20px;
