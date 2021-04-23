@@ -195,7 +195,7 @@ export default {
     // }
   }
 
-  @media (max-height: 900px) {
+  @media (max-height: 740px) {
     overflow: initial;
   }
 }

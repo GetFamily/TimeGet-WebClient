@@ -48,6 +48,8 @@ export default {
   border-radius: $radius_normal;
   margin-right: -$radius_normal;
   padding-right: $radius_normal;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   > :not(:first-child){
     border-top: solid thin $color_gray_70;

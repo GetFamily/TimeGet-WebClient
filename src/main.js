@@ -4,6 +4,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import 'material-icons/iconfont/material-icons.scss';
 import "@/assets/style/main.scss";
 import './third-party.config';
 

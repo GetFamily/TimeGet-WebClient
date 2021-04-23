@@ -4,17 +4,44 @@
     <main class="app-content">
       <div id="nav" :class="{ open }" @click="toggleNav">
         <h2>ابزارها</h2>
-        <router-link to="/occasions"><h3>مناسبت‌ها</h3></router-link>
-        <router-link to="/religious-moments"><h3>اوقات شرعی</h3></router-link>
-        <router-link to="/ladies"><h3>بانوان</h3></router-link>
-        <router-link to="/getting-pregnant"><h3>انعقاد نطفه</h3></router-link>
-        <router-link to="/pregnancy"><h3>بارداری</h3></router-link>
-        <h2>محتوا</h2>
-        <router-link to="/hadithes"><h3>احادیث و روایات</h3></router-link>
-        <router-link to="/articles"><h3>مقالات</h3></router-link>
-        <router-link to="/resource-introduction"
-          ><h3>معرفی منبع</h3></router-link
+        <router-link to="/occasions">
+          <span class="material-icons-round"> event </span>
+          <h3>مناسبت‌ها</h3>
+        </router-link>
+        <router-link to="/religious-moments">
+          <!-- <span class="material-icons-round"> wb_sunny </span> -->
+          <!-- <span class="material-icons-round"> wb_cloudy </span> -->
+          <!-- <span class="material-icons-round"> landscape </span> -->
+          <span class="material-icons-round"> brightness_2 </span>
+          <!-- <span class="material-icons-round"> satellite </span> -->
+          <h3>اوقات شرعی</h3>
+        </router-link>
+        <router-link to="/ladies">
+          <span class="material-icons-round"> face </span>
+          <h3>بانوان</h3>
+        </router-link>
+        <router-link to="/getting-pregnant">
+          <!-- <span class="material-icons-round"> card_giftcard </span> -->
+          <span class="material-icons-round"> child_friendly </span>
+          <h3>انعقاد نطفه</h3></router-link
         >
+        <router-link to="/pregnancy">
+          <span class="material-icons-round"> pregnant_woman </span>
+          <h3>بارداری</h3>
+        </router-link>
+        <h2>محتوا</h2>
+        <router-link to="/hadithes">
+          <span class="material-icons-round"> format_quote </span>
+          <h3>احادیث</h3>
+        </router-link>
+        <router-link to="/articles">
+          <span class="material-icons-round"> article </span>
+          <h3>مقالات</h3>
+        </router-link>
+        <router-link to="/resource-introduction">
+          <span class="material-icons-round"> feed </span>
+          <h3>معرفی منبع</h3>
+        </router-link>
       </div>
       <router-view class="current-route" />
       <SmartToday></SmartToday>
@@ -41,8 +68,7 @@ export default {
       if (event.offsetX > event.target.offsetWidth) {
         // clicked on psuedoelement after (outside)
         open.value = false;
-      }
-      else if (event.offsetY < 0) {
+      } else if (event.offsetY < 0) {
         // clicked on psuedoelement before (hambergure menu)
         open.value = !open.value;
       } else {
@@ -92,10 +118,31 @@ export default {
       padding: 20px;
       text-align: center;
       border-right: solid thick $color_primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .material-icons-round {
+        font-size: 22px;
+        margin-left: 5px;
+      }
 
       h3 {
-        font-size: 16px;
+        font-size: 15px;
         margin: 0;
+        white-space: nowrap;
+        @media (min-width: 661px) {
+          width: 0;
+          overflow: hidden;
+          transition: width 0.3s ease;
+        }
+      }
+
+      &.router-link-exact-active,
+      &:hover {
+        h3 {
+          width: 75px;
+        }
       }
 
       &.router-link-exact-active {
@@ -146,7 +193,11 @@ export default {
         position: absolute;
         z-index: 2;
         background-color: $color_gray_50;
-        background-image: linear-gradient(to left, white 0%, $color_gray_50 30%);
+        background-image: linear-gradient(
+          to left,
+          white 0%,
+          $color_gray_50 30%
+        );
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.3s ease;
