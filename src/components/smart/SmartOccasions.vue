@@ -1,6 +1,16 @@
 <template>
   <div class="smart-occasions">
+    <div class="loading" v-if="!occasionsOfSelectedMonth">
+      درحال دریافت <strong>مناسبت‌های امروز</strong> ...
+    </div>
     <div
+      class="no-item"
+      v-else-if="occasionsOfSelectedMonth && !occasionsOfSelectedMonth.length"
+    >
+      <strong>هیچ مناسبتی</strong> برای <strong>امروز</strong> وجود ندارد.
+    </div>
+    <div
+      v-else
       class="item"
       :class="[
         `date-${occasion.year}-${occasion.month}-${occasion.day}`,
@@ -127,6 +137,12 @@ export default {
 .smart-occasions {
   padding: 20px 30px 20px 0;
   overflow: auto;
+  .loading {
+    color: $color_primary_light_20;
+  }
+  .no-item {
+    opacity: 0.7;
+  }
   .item {
     padding: 5px;
     display: flex;

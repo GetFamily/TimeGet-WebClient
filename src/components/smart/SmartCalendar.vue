@@ -241,10 +241,10 @@ export default {
       .cell {
         height: 40px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        position: relative;
         width: 70px;
+        padding: 14px 15px 7px 15px;
 
         &.pre,
         &.post {
@@ -252,23 +252,43 @@ export default {
         }
         ::v-deep {
           .jalaali {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
             font-weight: bold;
-            margin-bottom: 10px;
           }
-          .hijri {
-            position: absolute;
-            right: 14px;
-            bottom: 6px;
-            font-family: sans-serif;
-            font-size: 10px;
+
+          .others {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .hijri {
+              font-family: sans-serif;
+              font-size: 10px;
+            }
+            .milaadi {
+              font-family: sans-serif;
+              font-size: 9px;
+            }
           }
-          .milaadi {
-            position: absolute;
-            left: 14px;
-            bottom: 7px;
-            font-family: sans-serif;
-            font-size: 10px;
+
+          @media (max-width: 530px) {
+            padding: 9px 7px 3px 7px;
           }
+
+          @media (max-width: 420px) {
+            padding: 8px 7px 2px 7px;
+          }
+        }
+      }
+      &:nth-child(2) {
+        .cell {
+          padding: 0;
+          padding-top: 10px;
         }
       }
       &:not(:first-child, :nth-child(2)) {
@@ -290,7 +310,7 @@ export default {
           &.holiday {
             color: $color_red;
           }
-          @media(max-width: 530px){
+          @media (max-width: 530px) {
             height: 50px;
           }
         }
@@ -328,6 +348,15 @@ export default {
           }
           .milaadi {
             font-size: 9px;
+          }
+        }
+
+        @media (max-width: 375px) {
+          > * {
+            font-size: 8px;
+          }
+          .milaadi {
+            font-size: 7px;
           }
         }
       }

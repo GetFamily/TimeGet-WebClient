@@ -1,7 +1,8 @@
 <template>
-  <button class="base-scroll-top" :class="{ visible }" @click="scrollToTop">
-    &#xbb;
-  </button>
+  <div class="base-scroll-top-container" :class="{ visible }">
+    <button class="base-scroll-top" @click="scrollToTop">&#xbb;</button>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -18,7 +19,7 @@ export default {
           console.log(elementProp.value);
           if (elementProp.value) {
             elementProp.value.addEventListener("scroll", (event) => {
-              console.log(event.target.scrollTop);
+              // console.log(event.target.scrollTop);
               if (event.target.scrollTop > 10) {
                 visible.value = true;
               } else {
@@ -46,24 +47,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-scroll-top {
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+.base-scroll-top-container {
   position: fixed;
+  display: flex;
+  flex-direction: row-reverse;
   left: 12px;
   bottom: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  //   font-weight: bold;
-  transform: rotate(90deg);
+  z-index: 1;
+  pointer-events: none;
   transition: opacity 0.3s ease, bottom 0.3s ease;
   opacity: 0;
-  pointer-events: none;
-  z-index: 1;
+  .base-scroll-top {
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    //   font-weight: bold;
+    transform: rotate(90deg);
+  }
 
   &.visible {
     bottom: 12px;

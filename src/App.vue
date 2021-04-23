@@ -38,8 +38,12 @@ export default {
   setup() {
     const open = ref(false);
     const toggleNav = (event) => {
-      if (event.offsetY < 0) {
-        // clicked on psuedoelement
+      if (event.offsetX > event.target.offsetWidth) {
+        // clicked on psuedoelement after (outside)
+        open.value = false;
+      }
+      else if (event.offsetY < 0) {
+        // clicked on psuedoelement before (hambergure menu)
         open.value = !open.value;
       } else {
         open.value = false;
@@ -69,7 +73,7 @@ export default {
     direction: ltr;
     width: 152px; // TODO: move to variables
     margin-right: 0;
-    transition: margin-right 0.3s ease .15s;
+    transition: margin-right 0.3s ease 0.15s;
 
     > * {
       direction: rtl;
@@ -133,12 +137,32 @@ export default {
     @media (max-width: 661px) {
       margin-right: -152px;
 
+      &::after {
+        content: "";
+        display: block;
+        margin-left: -100%;
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+        background-color: $color_gray_50;
+        background-image: linear-gradient(to left, white 0%, $color_gray_50 30%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
       &.open {
         margin-right: 0;
         transition: margin-right 0.3s ease;
         + .current-route {
           margin-left: -152px;
           transition: margin-left 0.3s ease;
+        }
+
+        &::after {
+          opacity: 0.5;
+          pointer-events: initial;
         }
       }
 

@@ -5,7 +5,7 @@ export default {
         console.log(this.state.currentModule.today);
         const response = await axios({
             baseURL: '',
-            url: '/occasions',
+            url: '/api/occasions',
             params: {
                 year: this.state.currentModule.today.toLocaleDateString('fa-IR', {year: 'numeric'}).toString().toEnglish(),
                 month: this.state.currentModule.today.toLocaleDateString('fa-IR', {month: 'numeric'}).toString().toEnglish(),
@@ -18,7 +18,7 @@ export default {
     async getOccasionsOfMonth({commit}, {year, month}) {
         const response = await axios({
             baseURL: '',
-            url: '/occasions',
+            url: '/api/occasions',
             params: {
                 year,
                 month,

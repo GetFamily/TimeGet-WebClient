@@ -1,5 +1,18 @@
-.my-scroll-top{
-    background-color: $color_bg_white;
-    box-shadow: $shaddow_normal;
-    color: $color_secondary_dark_20;
+.my-scroll-top {
+    &.base-scroll-top-container {
+        // ::v-deep {
+        > :not(:first-child) {
+            margin-left: 5px;
+        }
+
+        > * {
+            box-shadow: $shaddow_normal;
+            background-color: $color_bg_white;
+        }
+
+        .base-scroll-top {
+            color: $color_secondary_dark_20;
+        }
+        // }
+    }
 }

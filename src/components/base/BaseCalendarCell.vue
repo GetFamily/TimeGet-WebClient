@@ -3,11 +3,13 @@
     <div class="jalaali">
       {{ jalaaliDay }}
     </div>
-    <div class="hijri">
-      {{ hijriDay }}
-    </div>
-    <div class="milaadi">
-      {{ milaadiDay }}
+    <div class="others">
+      <div class="hijri">
+        {{ hijriDay }}
+      </div>
+      <div class="milaadi">
+        {{ milaadiDay }}
+      </div>
     </div>
   </section>
 </template>
@@ -24,7 +26,9 @@ export default {
       })
     );
     const milaadiDay = computed(() => props.value.getDate());
-    const hijriDay = computed(() => new HijrahDate(props.value).getDate().toString().toFarsi());
+    const hijriDay = computed(() =>
+      new HijrahDate(props.value).getDate().toString().toFarsi()
+    );
     return {
       jalaaliDay,
       milaadiDay,
