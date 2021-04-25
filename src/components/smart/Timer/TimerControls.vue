@@ -1,26 +1,32 @@
 <template>
   <div class="timer-controls">
-    <button class="start" :class="{ paused: timerRunning }">
+    <button class="start" :class="{ running }" @click="toggle">
       <span class="material-icons-round">
-        {{ !timerRunning ? "play_arrow" : "pause" }}
+        {{ !running ? "play_arrow" : "pause" }}
       </span>
     </button>
     <button>
       <span class="material-icons-round"> flag </span>
     </button>
-    <button>
+    <button @click="reset">
       <span class="material-icons-round"> restart_alt </span>
     </button>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
-    const timerRunning = ref(false);
+    const store = useStore();
+    const running = computed(() => store.state.timerModule.running);
+    const toggle = () => store.dispatch("timerModule/toggle");
+    const reset = () => store.dispatch("timerModule/reset");
     return {
-      timerRunning,
+      running,
+      toggle,
+      reset,
     };
   },
 };
@@ -32,6 +38,7 @@ export default {
   display: flex;
   direction: ltr;
   align-items: center;
+  padding-left: 10px;
 
   > button {
     border-radius: 50%;
@@ -60,7 +67,7 @@ export default {
         background-color: $color_primary_dark_20;
       }
 
-      &.paused {
+      &.running {
         background-color: $color_secondary_dark_10;
 
         &:hover {

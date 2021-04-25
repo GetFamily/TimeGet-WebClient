@@ -36,6 +36,10 @@ export default {
     flex-direction: row;
     justify-content: center;
     // align-items: center;
+
+    @media (max-width: 1150px){
+      flex-direction: column;
+    }
   }
 }
 </style>

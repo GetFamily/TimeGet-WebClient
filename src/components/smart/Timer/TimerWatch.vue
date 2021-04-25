@@ -1,24 +1,26 @@
 <template>
   <div class="timer-watch">
-    <div class="hours" :class="{ faded: hours === '00' }">
+    <div class="number hours" :class="{ faded: hours === '00' }">
       {{ hours }}
     </div>
     <div class="seperator" :class="{ faded: hours === '00' }">:</div>
-    <div class="minutes" :class="{ faded: minutes === '00' }">
+    <div class="number minutes" :class="{ faded: minutes === '00' }">
       {{ minutes }}
     </div>
     <div class="seperator" :class="{ faded: minutes === '00' }">:</div>
-    <div class="seconds">{{ seconds }}</div>
+    <div class="number seconds">{{ seconds }}</div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from 'vuex';
 export default {
   setup() {
-    const hours = ref("00");
-    const minutes = ref("10");
-    const seconds = ref("55");
+    const store = useStore();
+    const hours = computed(() => store.state.timerModule.hours);
+    const minutes = computed(() => store.state.timerModule.minutes);
+    const seconds = computed(() => store.state.timerModule.seconds);
     return {
       hours,
       minutes,
@@ -29,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/_variables';
+@import "@/assets/style/_variables";
 
 .timer-watch {
   display: flex;
@@ -37,12 +39,17 @@ export default {
   font-size: 80px;
   font-weight: bold;
 
-  > .faded{
-      color: $color_gray_60;
+  > .faded {
+    color: $color_gray_60;
   }
 
-  .seperator{
-      margin: 0 5px;
+  .seperator {
+    margin: 0 5px;
+  }
+
+  .number {
+      width: 95px;
+      text-align: center;
   }
 }
 </style>

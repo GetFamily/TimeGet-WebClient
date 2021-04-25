@@ -25,9 +25,17 @@ export default {};
   .content {
     font-size: 13px;
 
-    .title{
+    .title {
       color: $color_gray_50;
     }
+  }
+
+  @media (max-width: 1150px) {
+    border-right: none;
+    border-top: solid thin $color_gray_60;
+    margin-right: 0px;
+    margin-top: 20px;
+    padding-top: 20px;
   }
 }
 </style>
