@@ -1,7 +1,9 @@
 <template>
   <div class="smart-today" :class="{ open }" @click="toggle">
     <SmartClock :now="now"></SmartClock>
-    <SmartTodayOccasions :today="today"></SmartTodayOccasions>
+    <div class="quick-access">
+      <SmartTodayOccasions :today="today"></SmartTodayOccasions>
+    </div>
   </div>
 </template>
 
@@ -40,6 +42,8 @@ export default {
 <style lang="scss">
 @import "@/assets/style/_variables";
 .smart-today {
+  display: flex;
+  flex-direction: column;
   background-color: $color_bg_white;
   margin-left: 10px;
   width: 327px;
@@ -48,11 +52,16 @@ export default {
   border-radius: $radius_normal;
   margin-right: -$radius_normal;
   padding-right: $radius_normal;
-  overflow-y: auto;
-  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
 
-  > :not(:first-child){
-    border-top: solid thin $color_gray_70;
+  .quick-access {
+    flex-shrink: 1;
+    overflow-y: auto;
+    
+    > * {
+      border-top: solid thin $color_gray_70;
+    }
   }
 
   h1 {

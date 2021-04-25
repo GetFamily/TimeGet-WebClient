@@ -24,6 +24,18 @@ const routes = [
       import(/* webpackChunkName: "religious_moments" */ "../views/ReligiousMoments.vue")
   },
   {
+    path: "/weather",
+    name: "Weather",
+    component: () =>
+      import(/* webpackChunkName: "weather" */ "../views/Weather.vue")
+  },
+  {
+    path: "/timer",
+    name: "Timer",
+    component: () =>
+      import(/* webpackChunkName: "timer" */ "../views/Timer.vue")
+  },
+  {
     path: "/hadithes",
     name: "Hadithes",
     component: () =>

@@ -1,11 +1,11 @@
 <template>
-  <CommingSoon feature="اوقات شرعی"></CommingSoon>
+  <CommingSoon feature="آب و هوا"></CommingSoon>
 </template>
 
 <script>
 import CommingSoon from "@/components/smart/CommingSoon.vue";
 export default {
-  name: "ReligiousMoments",
+  name: "Weather",
   components: {
     CommingSoon,
   },

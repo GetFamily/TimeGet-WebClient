@@ -1,11 +1,11 @@
 <template>
-  <CommingSoon feature="انعقاد نطفه"></CommingSoon>
+  <CommingSoon feature="اوقات شرعی"></CommingSoon>
 </template>
 
 <script>
 import CommingSoon from "@/components/smart/CommingSoon.vue";
 export default {
-  name: "GettingPregnant",
+  name: "ReligiousMoments",
   components: {
     CommingSoon,
   },

@@ -16,6 +16,10 @@
           <!-- <span class="material-icons-round"> satellite </span> -->
           <h3>اوقات شرعی</h3>
         </router-link>
+        <router-link to="/weather">
+          <span class="material-icons-round"> wb_sunny </span>
+          <h3>آب و هوا</h3>
+        </router-link>
         <router-link to="/ladies">
           <span class="material-icons-round"> face </span>
           <h3>بانوان</h3>
@@ -28,6 +32,11 @@
         <router-link to="/pregnancy">
           <span class="material-icons-round"> pregnant_woman </span>
           <h3>بارداری</h3>
+        </router-link>
+        <h2>ابزارک‌ها</h2>
+        <router-link to="/timer">
+          <span class="material-icons-round"> timer </span>
+          <h3>زمان‌گیر</h3>
         </router-link>
         <h2>محتوا</h2>
         <router-link to="/hadithes">
@@ -115,7 +124,7 @@ export default {
       font-weight: bold;
       color: $color_font_white;
       text-decoration: none;
-      padding: 20px;
+      padding: 15px 20px;
       text-align: center;
       border-right: solid thick $color_primary;
       display: flex;
