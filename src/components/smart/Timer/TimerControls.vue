@@ -5,7 +5,7 @@
         {{ !running ? "play_arrow" : "pause" }}
       </span>
     </button>
-    <button>
+    <button @click="lapse" :disabled="!canCaptureLapse">
       <span class="material-icons-round"> flag </span>
     </button>
     <button @click="reset">
@@ -21,12 +21,23 @@ export default {
   setup() {
     const store = useStore();
     const running = computed(() => store.state.timerModule.running);
+    const canCaptureLapse = computed(
+      () =>
+        !(
+          store.state.timerModule.hours === "00" &&
+          store.state.timerModule.minutes === "00" &&
+          store.state.timerModule.seconds === "00"
+        )
+    );
     const toggle = () => store.dispatch("timerModule/toggle");
+    const lapse = () => store.dispatch("timerModule/lapseCapture");
     const reset = () => store.dispatch("timerModule/reset");
     return {
       running,
       toggle,
+      lapse,
       reset,
+      canCaptureLapse,
     };
   },
 };
@@ -47,6 +58,11 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 10px;
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: default;
+    }
 
     &:not(:first-child) {
       margin-left: 10px;

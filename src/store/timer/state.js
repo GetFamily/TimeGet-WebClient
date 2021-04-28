@@ -3,4 +3,6 @@ export default {
     minutes: '00',
     seconds: '00',
     running: false,
+
+    lapses: [],
 };

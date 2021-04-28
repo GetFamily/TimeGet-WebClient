@@ -12,4 +12,10 @@ export default {
     toggle(state) {
         state.running = !state.running;
     },
+    lapseCapture(state, record){
+        state.lapses.push(record);
+    },
+    lapseClear(state){
+        state.lapses = [];
+    }
 };

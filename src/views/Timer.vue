@@ -37,7 +37,13 @@ export default {
     justify-content: center;
     // align-items: center;
 
-    @media (max-width: 1150px){
+    .current {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (max-width: 1150px) {
       flex-direction: column;
     }
   }
